@@ -1,0 +1,101 @@
+---------------------------------------------------------------------------------------------------
+PART A
+---------------------------------------------------------------------------------------------------
+English:
+KNN: 0.562
+SVM: 0.62
+
+Spanish:
+KNN: 0.692
+SVM: 0.785
+
+Catalan:
+KNN: 0.714
+SVM: 0.827
+
+From the experiment results, we know that SVM has a better performance than kNN. 
+
+---------------------------------------------------------------------------------------------------
+PART B
+Note: In this part, the precision and recall I got are actually the same all the time. So I will refer them both as accuracy.
+---------------------------------------------------------------------------------------------------
+a.
+If I only use this feature with a window size of 3. I got the following accuracy:
+English: 0.643
+Spanish: 0.806
+Catalan: 0.831
+After adding this feature to the bag-of-words feature in the part A. I got the following accuracy:
+English: 0.653
+Spanish: 0.814
+Catalan: 0.838 
+Compared with part A, we know that adding these feature results in a fair improvement of the performance. Thus, we will keep this feature for later use.
+The Collocational feature does improve the performance of a system. It's because it contains information about the context. The sense of a word is related to words and their POSs inside a window. For example, an verb is more possible to be followed by a norn. 
+---------------------------------------------------------------------------------------------------
+b. 
+Remove stop words:
+After I remove the stop words in the collocational features, it will slightly reduce the accuracy. Thus, we don't remove stop words in the final system. 
+I guess they somehow contain information that should not be removed. For example, a verb is more likely to come with a pronoun(stop word) than a noun. 
+
+Remove punctuations:
+Afer I remove punctuations in the bag-of-words feature, it will slightly improve the accuracy. However, If I remove punctuations in the collocational features, it will slightly reduce the accuracy of the system:
+English: -0.1
+Spanish: -0.08
+Catalan: -0.03
+Thus, we will remove punctuations in the bag-of-words feature in the final system. 
+With a small window size, the remove of punctuations will always reduce the performance. It's because when a window is small, the information is relatively limited. The removal of them will lose too many information in thiss situation.
+
+Stemming:
+After we add stemming to features from part A and only use these two features, it has a fair imporvement on the system's performance:
+English: 0.630
+Spanish: 0.800
+Catalan: 0.828
+Thus, we will keep it in the final system. 
+Stemming can always improve the performance, especially for Spanish and Catalan. The stemming of a word can remove the different forms of the same word, thus expose more information. 
+---------------------------------------------------------------------------------------------------
+c. 
+If we only use this feautre, its accuracy is as follows:
+English: 0.569
+Spanish: 0.731
+Catalan: 0.738
+After adding them to other features discussed above. It can work well with them. Thus, this feature will be kept in the final system.
+Relevance score feature indicates how relevant a word related to sense, thus it can always improve the performance of the system.
+---------------------------------------------------------------------------------------------------
+d. 
+I have tried with these three kinds of features. For every word inside a window, I will use their first synonym, hyponym or hypernym in WORDNET as feature. However, they all seem to slightly reduce the accuarcy of the system. For example, after I add synonyms to the final system, its accuracy becomes:
+English: -0.12
+Spanish: -0.04
+Catalan: -0.09
+Thus, this feature will be discarded in the final system. 
+These features do contain information relevant to the context. However, they always reduce the performance. I guess this is because most of times, it will introduce too many unnecessary information. 
+---------------------------------------------------------------------------------------------------
+e.
+Most of the time, the Chi-square feature selection method will slightly reduce the performance of the system. However, when I make the window size to be larger, this method will instead improve thr performance of the system:
+English: +0.05
+Spanish: +0.1
+Catalan: +0.08
+This feature selection method has something to do with window size. When the window size is big, it can increase the accuracy. Because in this situatioin, there are extra information in the system. It's how the feature selection comes into effect.
+
+---------------------------------------------------------------------------------------------------
+CONCLUSION
+---------------------------------------------------------------------------------------------------
+1. Some features will reduce the accuracy. The idea that adding more features will always improve performance is not right in this system. For example, adding synonym will instead slightly reduce the accuracy.
+2. Some feature has a lot to do with their parameters. For example, the POS feature will greatly improve the accuracy with a small window size. If we increase the window size, it will result in a worse performance.
+3.  An interesting observation is that the remove of punctuations has to do with the window size. when a small window size, the removewill always reduce the performance. It's because when a window is small, the information is relatively limited. The removal of them will lose too many information in thiss situation.
+4. The feature selection is very interesting. When the window size is small, it will reduce the accuracy. However, if we increase the window size, it will improve the performance. To understand this, we need to understand the function of feature selection. The aim of feature selection is to filter unrelevant information. Thus, when the window size is small, it will only filter some useful information. When the window size increases, there are much more extra information that will affect the performance of a system.
+5. The same feature will have different effects on different lanuages. This has something to do with their grammar rules. For example, Spanish word order is generally Subject-Verb-Object, like English. However, Spanish allows more flexibility than English, and the words to be emphasised are always placed at the end of the sentence.
+
+---------------------------------------------------------------------------------------------------
+BEST RESULT
+---------------------------------------------------------------------------------------------------
+English: 0.680
+Spanish: 0.832
+Catalan: 0.849
+
+---------------------------------------------------------------------------------------------------
+RUNNING TIME
+---------------------------------------------------------------------------------------------------
+English: 5m25.449s
+Spanish: 3m4.027s
+Catalan: 3m49.120s
+
+
